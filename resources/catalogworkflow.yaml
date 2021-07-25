@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: catalog-workflow-step-
+spec:
+  entrypoint: catalogprocess
+  arguments:
+    parameters:
+      - name: catalogname
+        value: test-workflow-name
+  templates:
+    - name: catalogparsingtemplate
+      inputs:
+        parameters:
+          - name: step-param-1
+      container:
+        image: deepaksinghvi/catalogwf:latest
+        command: [catalogwf, "parsecatalog"]
+        args: [ "{{inputs.parameters.step-param-1}}" ]
+    - name: ruleexecutiontemplate
+      inputs:
+        parameters:
+          - name: step-param-2
+      container:
+        image: deepaksinghvi/catalogwf:latest
+        command: [ catalogwf, "executerules" ]
+        args: [ "{{inputs.parameters.step-param-2}}" ]
+    - name: catalogapprovaltemplate
+      inputs:
+        parameters:
+          - name: step-param-3
+      container:
+        image: deepaksinghvi/catalogwf:latest
+        command: [ catalogwf, "approvalflow" ]
+        args: [ "{{inputs.parameters.step-param-3}}" ]
+    - name: catalogprocess
+      dag:
+        tasks:
+          - name: Parsing
+            template: catalogparsingtemplate
+            arguments:
+              parameters:
+                - name: step-param-1
+                  value: "{{workflow.parameters.catalogname}}"
+          - name: RuleExecution
+            dependencies: [Parsing]
+            template: ruleexecutiontemplate
+            arguments:
+              parameters:
+                - name: step-param-2
+                  value: "{{workflow.parameters.catalogname}}"
+          - name: CatalogApproval
+            dependencies: [RuleExecution]
+            template: catalogapprovaltemplate
+            arguments:
+              parameters:
+                - name: step-param-3
+                  value: "{{workflow.parameters.catalogname}}"

@@ -1,0 +1,156 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Catalog Service",
+        "title": "Catalog Service API",
+        "contact": {
+            "name": "Deepak Singhvi",
+            "email": "deepak.singhvi@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/catalog": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Catalog"
+                ],
+                "summary": "Process Catalog",
+                "operationId": "process-catalog",
+                "parameters": [
+                    {
+                        "description": "Process Catalog",
+                        "name": "catalogName",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CatalogRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/catalog/workflow": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Catalog"
+                ],
+                "summary": "Initiate Catalog Workflow",
+                "operationId": "initiate-catalog-workflow",
+                "parameters": [
+                    {
+                        "description": "Initiate Catalog Workflow",
+                        "name": "workflowRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.WorkFlowRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "description": "get the status of server.",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "root"
+                ],
+                "summary": "Show the status of server.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dto.CatalogRequest": {
+            "type": "object",
+            "properties": {
+                "catalogname": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.WorkFlowRequest": {
+            "type": "object",
+            "properties": {
+                "baseurl": {
+                    "type": "string"
+                },
+                "workflowtemplate": {
+                    "$ref": "#/definitions/dto.WorkFlowTemplateRequest"
+                }
+            }
+        },
+        "dto.WorkFlowTemplateRequest": {
+            "type": "object",
+            "properties": {
+                "namespace": {
+                    "type": "string"
+                },
+                "resourceKind": {
+                    "type": "string"
+                },
+                "resourceName": {
+                    "type": "string"
+                },
+                "submitOptions": {
+                    "type": "object",
+                    "properties": {
+                        "entryPoint": {
+                            "type": "string"
+                        },
+                        "parameters": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

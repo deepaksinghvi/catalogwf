@@ -1,0 +1,101 @@
+basePath: /api/v1
+definitions:
+  dto.CatalogRequest:
+    properties:
+      catalogname:
+        type: string
+    type: object
+  dto.WorkFlowRequest:
+    properties:
+      baseurl:
+        type: string
+      workflowtemplate:
+        $ref: '#/definitions/dto.WorkFlowTemplateRequest'
+    type: object
+  dto.WorkFlowTemplateRequest:
+    properties:
+      namespace:
+        type: string
+      resourceKind:
+        type: string
+      resourceName:
+        type: string
+      submitOptions:
+        properties:
+          entryPoint:
+            type: string
+          parameters:
+            items:
+              type: string
+            type: array
+        type: object
+    type: object
+info:
+  contact:
+    email: deepak.singhvi@gmail.com
+    name: Deepak Singhvi
+  description: Catalog Service
+  title: Catalog Service API
+  version: "1.0"
+paths:
+  /catalog:
+    post:
+      consumes:
+      - application/json
+      operationId: process-catalog
+      parameters:
+      - description: Process Catalog
+        in: body
+        name: catalogName
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CatalogRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Process Catalog
+      tags:
+      - Catalog
+  /catalog/workflow:
+    post:
+      consumes:
+      - application/json
+      operationId: initiate-catalog-workflow
+      parameters:
+      - description: Initiate Catalog Workflow
+        in: body
+        name: workflowRequest
+        required: true
+        schema:
+          $ref: '#/definitions/dto.WorkFlowRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Initiate Catalog Workflow
+      tags:
+      - Catalog
+  /health:
+    get:
+      consumes:
+      - '*/*'
+      description: get the status of server.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Show the status of server.
+      tags:
+      - root
+swagger: "2.0"
