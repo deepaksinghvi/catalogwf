@@ -81,7 +81,7 @@ Resuls for argo-server service
 ```
 $ kubectl get svc -n argo argo-server  
 NAME          TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)          AGE
-argo-server   LoadBalancer   10.99.57.142   192.168.1.35   2746:31513/TCP   42s
+argo-server   LoadBalancer   111.22.33.44   192.1.1.1   2746:31513/TCP   42s
 ```
 
 Click on plus (+) icon and Click "Select port to view on Host 1"
