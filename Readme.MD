@@ -11,7 +11,7 @@ It works as the cli app as well as Restful WebService.
 * ClI App is built using [Cobra](https://github.com/spf13/cobra) Library
 * Restful WebService is built using [Gin Web Framework](https://github.com/gin-gonic/gin)  
 
-Catalog Workflow has been integrated with [Argo Workflow](https://argoproj.github.io/workflows).
+Catalog Workflow has been integrated with [Argo Workflow](https://argoproj.github.io/workflows).  
 Argo Workflows is an open source container-native workflow engine for orchestrating parallel jobs on Kubernetes.
 
 ### Pre-Requisites
@@ -72,14 +72,17 @@ Run only Step1 of Step4 and run the commands below
 ```
 kubectl create ns argo
 kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/release-2.12.1/manifests/quick-start-minimal.yaml
-kubectl patch svc argo-server -n argo -p '{"spec": {"type": "LoadBalancer", "externalIPs":["192.168.1.35"]}}'
+kubectl patch svc argo-server -n argo -p '{"spec": {"type": "LoadBalancer", "externalIPs":["192.1.1.1"]}}'
 kubectl get svc -n argo argo-server
 ```
+Use externalIPs as your machine's IP Address
 
-Resuls for argo-server service 
-$ kubectl get svc -n argo argo-server
+Resuls for argo-server service
+```
+$ kubectl get svc -n argo argo-server  
 NAME          TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)          AGE
 argo-server   LoadBalancer   10.99.57.142   192.168.1.35   2746:31513/TCP   42s
+```
 
 Click on plus (+) icon and Click "Select port to view on Host 1"
 ![openwebport.png](resources/openwebport.png)
