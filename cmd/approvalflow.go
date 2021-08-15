@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/deepaksinghvi/catalogwf/pkg/service"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
@@ -12,6 +13,7 @@ var approvalflowCmd = &cobra.Command{
 	Long: `Approval Flow Command.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		log.Info("approvalflow called")
+		service.ApprovalFlow(args[0])
 	},
 }
 

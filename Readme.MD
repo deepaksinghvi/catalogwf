@@ -52,6 +52,7 @@ docker push deepaksinghvi/catalogwf:latest
 ```
 minikube start
 minikube dashboard
+kubectl create ns argo
 kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/release-2.12.1/manifests/quick-start-minimal.yaml
 
 //verify pods are up and running
