@@ -1,4 +1,7 @@
 ## Catalog Management System
+
+![CircleCI](https://circleci.com/gh/deepaksinghvi/catalogwf.svg?style=svg)](https://circleci.com/gh/deepaksinghvi/catalogwf/?branch=main)
+
 Catalog Management System for e-commerce users (B2B or B2C), helps users to procurement items. 
 A complete catalog management solution would have consumer-like shopping with a sophisticated procurement process. 
 This example is primarily focusing on the catalog processing using workflow orchestration for workflow execution in a Kubernetes pods.
