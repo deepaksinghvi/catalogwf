@@ -34,6 +34,12 @@ func ApprovalFlow(catalogName string) {
 	log.Info(fmt.Sprintf("ApprovalFlow completed of catalog name :%s", catalogName))
 }
 
+func BuildHierarchy(catalogName string) {
+	log.Info(fmt.Sprintf("BuildHierarchy started of catalog name :%s", catalogName))
+	time.Sleep(time.Duration(rand.Intn(max-min) + min) * time.Second)
+	log.Info(fmt.Sprintf("BuildHierarchy completed of catalog name :%s", catalogName))
+}
+
 func InitiateCatalogWorkflow(request dto.WorkFlowRequest) string {
 	url := fmt.Sprintf(`%s/api/v1/workflows/argo/submit`,
 		request.BaseUrl,

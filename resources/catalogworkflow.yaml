@@ -33,6 +33,14 @@ spec:
         image: deepaksinghvi/catalogwf:latest
         command: [ catalogwf, "approvalflow" ]
         args: [ "{{inputs.parameters.step-param-3}}" ]
+    - name: cataloghierarchytemplate
+      inputs:
+        parameters:
+          - name: step-param-4
+      container:
+        image: deepaksinghvi/catalogwf:latest
+        command: [ catalogwf, "buildhierarchy" ]
+        args: [ "{{inputs.parameters.step-param-4}}" ]
     - name: catalogprocess
       dag:
         tasks:
@@ -55,4 +63,11 @@ spec:
             arguments:
               parameters:
                 - name: step-param-3
+                  value: "{{workflow.parameters.catalogname}}"
+          - name: CatalogBuildHierarchy
+            dependencies: [CatalogApproval]
+            template: cataloghierarchytemplate
+            arguments:
+              parameters:
+                - name: step-param-4
                   value: "{{workflow.parameters.catalogname}}"
