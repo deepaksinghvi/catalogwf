@@ -141,7 +141,7 @@ curl 'http://localhost:2746/api/v1/workflows/argo/submit' \
 ![submitworkflowrequestviaargoserverswagger.png](resources/submitworkflowrequestviaargoserverswagger.png)
 
 
-### Update Swaggo Document
+### Generate/Update Swaggo Document
 ```
 swag init
 ```
